@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+	<script src='jquery-2.1.1.js'></script>
+	<style>
+ @-webkit-keyframes loading {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @keyframes loading {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    .loading {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        z-index: 9;
+        background-color: rgba(0,0,0,1);
+    }
+    .loading::before {
+        content: '';
+        display: inline-block;
+        vertical-align: middle;
+        width: 0;
+        height: 100%;
+    }
+    .loadingBox {
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 14px;
+        background-color: rgba(0,0,0,0);
+        color: rgba(255,255,255,.8);
+        width: 200px;
+        height: 200px;
+    }
+    .loadingImg {
+        position: 
+relative;
+        width: 60px;
+        height: 60px;
+        background: url(http://wq.360buyimg.com/fd/promote/2015/a21/images/loading.png) 0 0 no-repeat;
+        background-size: 100% 100%;
+        margin: 30px auto 20px;
+        font-size: 20px;
+        color: rgba(255,255,255,.8);
+        -webkit-animation: loading 1.2s linear infinite;
+        -moz-animation: loading 1.2s linear infinite;
+        -ms-animation: loading 1.2s linear infinite;
+        animation: loading 1.2s linear infinite;
+    }
+	 .WX_backtop {
+        position: fixed;
+        z-index: 100;
+        right: 0;
+        bottom: 10px;
+        width: 40px;
+        height: 40px;
+        font-size: 0;
+        text-indent: -9999em;
+        overflow: hidden;
+        background-color: rgba(0, 0, 0, 0.7);
+        -webkit-border-radius: 3px 0 0 3px;
+        border-radius: 3px 0 0 3px;
+        display: none;
+    }
+    .WX_backtop:after {
+        width: 23px;
+        height: 23px;
+        content: '\20';
+        display: block;
+        margin: 9px 0 0 9px;
+        float: left;
+        background-image: url(http://static.paipaiimg.com/wx/img/mall/icon_nav_v2.png?v3);
+        background-repeat:no-repeat;
+        background-size:207px 46px;
+        background-position:-115px 0
+     }
+    .WX_backtop_active {
+        display: block;
+        bottom: 60px;
+    }
+	
+	.wx_loading_icon {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            margin-left: -16px;
+            width: 24px;
+            height: 24px;
+            border: 2px solid #fff;
+            border-radius: 24px;
+            -webkit-animation: gif 1s infinite linear;
+            animation: gif 1s infinite linear;
+            clip: rect(0 auto 12px 0)
+        }
+
+	.wx_loading2 {
+            text-align: center;
+            padding: 5px;
+            height: 32px;
+            position: relative
+        }
+
+        .wx_loading2 .wx_loading_icon {
+            border-color: #237FE5;
+            top: 7px
+        }
+	</style>
+	</head>
+	<body>
+<div class="loading" id="loading">
+    <div class="loadingBox">
+        <div class="loadingImg"></div>
+        加载中...
+    </div>
+</div>
+   <div class="wx_loading2"><i class="wx_loading_icon"></i></div>
+<a id="backToTop" href="javascript:;" class="WX_backtop" style="bottom: 120px;">返回顶部</a>
+<script>
+        var initBackBtn = function(el, activeCls) {
+        var screenH = screen.height;
+        if (el.length == 0) {
+            console.log('el can not be null');
+        }
+        el.unbind().on('click', function(e) {
+            window.scrollTo(0, 0);
+            e.preventDefault && e.preventDefault();
+            e.stopPropagation && e.stopPropagation();
+        });
+
+        $(document).on('scroll', function() {
+            checkBackToTop(screenH);
+        });
+
+        //滚动时是否展示回到顶部按钮
+        function checkBackToTop(screenH) {
+            activeCls = activeCls || 'WX_backtop_active';
+            if (document.body.scrollTop > screenH) {
+                el.removeClass(activeCls);
+            } else if (document.body.scrollTop < screenH) {
+                el.addClass(activeCls);
+            }
+        }
+    }
+initBackBtn($('#backToTop'));
+</script>
+</body>
+</html>
